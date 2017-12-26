@@ -3,7 +3,6 @@
     package="unlockdemo.qiang.com.unlockdemo">
 
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -20,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PictureActivity"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package unlockdemo.qiang.com.unlockdemo;
 import android.app.KeyguardManager;
 import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Vibrator;
 import android.support.annotation.RequiresApi;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         button_unlock_gesture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PictureActivity.class));
+
                 gesture_unlock.setOnGestureFinishListener(new GestureLockView.OnGestureFinishListener() {
                     @Override
                     public void OnGestureFinish(boolean success, String gestureCode) {
