@@ -1,12 +1,9 @@
 package unlockdemo.qiang.com.unlockdemo;
 
-import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.Service;
 import android.content.Context;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
-import android.os.CancellationSignal;
 import android.os.Vibrator;
 import android.support.annotation.RequiresApi;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
@@ -19,14 +16,16 @@ import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
+import unlockdemo.qiang.com.unlockdemo.unlock.CryptoObjectCreator;
+import unlockdemo.qiang.com.unlockdemo.unlock.GestureLockView;
 
 import static android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_CANCELED;
 
 public class MainActivity extends AppCompatActivity {
     private Button button_unlock_gesture;
     private Button button_unlock_finger;
+    private GestureLockView gesture_unlock;
+
     private FingerprintManagerCompat fingerprintManager;
     private Vibrator vibrator;
     private android.support.v4.os.CancellationSignal cancellationSignal;
@@ -38,10 +37,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         button_unlock_gesture = findViewById(R.id.button_unlock_gesture);
         button_unlock_finger = findViewById(R.id.button_unlock_finger);
+        gesture_unlock = findViewById(R.id.gesture_unlock);
         button_unlock_gesture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                gesture_unlock.setOnGestureFinishListener(new GestureLockView.OnGestureFinishListener() {
+                    @Override
+                    public void OnGestureFinish(boolean success, String gestureCode) {
+                        if (gestureCode.equals("012"))
+                            gesture_unlock.setUpDiyColor(true);
+                        else
+                            gesture_unlock.setUpDiyColor(false);
+                        Log.i("gesturesecret:", success + "___" + gestureCode);
+                    }
+                });
             }
         });
 

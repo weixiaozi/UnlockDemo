@@ -1,4 +1,4 @@
-package unlockdemo.qiang.com.unlockdemo;
+package unlockdemo.qiang.com.unlockdemo.unlock;
 
 import android.annotation.TargetApi;
 import android.hardware.fingerprint.FingerprintManager;
